@@ -1,8 +1,8 @@
 package by.beatdev.service.impl;
 
-import by.beatdev.dto.ChangingStatusRequest;
 import by.beatdev.dto.ChangingStatusResponse;
 import by.beatdev.entity.User;
+import by.beatdev.entity.UserStatus;
 import by.beatdev.repository.UserRepository;
 import by.beatdev.service.AbstractService;
 import by.beatdev.service.UserService;
@@ -23,7 +23,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         this.userRepository = userRepository;
     }
 
-    public void createOrUpdate(User user) {
+    public void save(User user) {
         userRepository.save(user);
     }
 
@@ -36,14 +36,12 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         userRepository.delete(id);
     }
 
-    public ChangingStatusResponse updateUserStatus(ChangingStatusRequest request) {
+    public UserStatus updateUserStatus(Integer userId, UserStatus newStatus) {
         ChangingStatusResponse response = new ChangingStatusResponse();
-        User user = findEntityById(request.getId());
-        response.setId(user.getId());
-        response.setPreviousStatus(user.getStatus());
-        response.setNewStatus(request.getNewStatus());
-        user.setStatus(request.getNewStatus());
-        createOrUpdate(user);
-        return response;
+        User user = findEntityById(userId);
+        UserStatus previousStatus = user.getStatus();
+        user.setStatus(newStatus);
+        save(user);
+        return previousStatus;
     }
 }

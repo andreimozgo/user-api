@@ -4,7 +4,7 @@ import by.beatdev.entity.AbstractEntity;
 
 public interface Service<T extends AbstractEntity> {
 
-    void createOrUpdate(T t);
+    void save(T t);
 
     T findEntityById(Integer id);
 

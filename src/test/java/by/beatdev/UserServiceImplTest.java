@@ -20,7 +20,7 @@ public class UserServiceImplTest extends Assert {
     public void testCreate() {
         User user = new User();
         user.setName("testUser");
-        userService.createOrUpdate(user);
+        userService.save(user);
         User readUser = userService.findEntityById(user.getId());
         assertNotNull(readUser);
         assertEquals(user.getName(), readUser.getName());
@@ -31,7 +31,7 @@ public class UserServiceImplTest extends Assert {
     public void testFindEntityById() {
         User user = new User();
         user.setName("testUser");
-        userService.createOrUpdate(user);
+        userService.save(user);
         User findUser = userService.findEntityById(user.getId());
         assertNotNull(findUser);
         assertEquals(user.getId(), findUser.getId());
@@ -44,7 +44,7 @@ public class UserServiceImplTest extends Assert {
         User user = new User();
         user.setId(null);
         user.setName("testUser");
-        userService.createOrUpdate(user);
+        userService.save(user);
         userService.delete(user.getId());
         User deletedUser = userService.findEntityById(user.getId());
         assertNull(deletedUser);
