@@ -4,12 +4,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @GenericGenerator(name = "PK", strategy = "increment")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User extends AbstractEntity implements Serializable {
+public class User extends AbstractEntity  {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "user_id")
@@ -21,8 +20,14 @@ public class User extends AbstractEntity implements Serializable {
     private String avatar;
     @Column (name = "email")
     private String email;
-    @Column (name = "status")
-    private String status;
+    @Column (name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
+
+    public User() {
+        this.status = UserStatus.Offline;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -56,12 +61,13 @@ public class User extends AbstractEntity implements Serializable {
         this.email = email;
     }
 
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
+
 }
 

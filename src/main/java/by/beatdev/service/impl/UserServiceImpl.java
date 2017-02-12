@@ -1,8 +1,8 @@
 package by.beatdev.service.impl;
 
 import by.beatdev.entity.User;
-import by.beatdev.model.ChangeStatusRequest;
-import by.beatdev.model.ChangeStatusResponse;
+import by.beatdev.dto.ChangingStatusRequest;
+import by.beatdev.dto.ChangingStatusResponse;
 import by.beatdev.repository.UserRepository;
 import by.beatdev.service.AbstractService;
 import by.beatdev.service.UserService;
@@ -36,13 +36,13 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
             userRepository.delete(id);
     }
 
-    public ChangeStatusResponse updateUserStatus (ChangeStatusRequest request){
-        ChangeStatusResponse response = new ChangeStatusResponse();
+    public ChangingStatusResponse updateUserStatus (ChangingStatusRequest request){
+        ChangingStatusResponse response = new ChangingStatusResponse();
         User user = findEntityById(request.getId());
         response.setId(user.getId());
-        response.setPreviousSatus(user.getStatus());
-        response.setStatus(request.getStatus());
-        user.setStatus(request.getStatus());
+        response.setPreviousStatus(user.getStatus());
+        response.setNewStatus(request.getNewStatus());
+        user.setStatus(request.getNewStatus());
         createOrUpdate(user);
         return response;
     }
