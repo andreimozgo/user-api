@@ -16,7 +16,7 @@ user-api\src\main\resources\application.properties and check properties
     spring.datasource.username
     spring.datasource.password
     
-Set them based on you environment.
+Set them based on your environment.
 
 **Running project**
 
