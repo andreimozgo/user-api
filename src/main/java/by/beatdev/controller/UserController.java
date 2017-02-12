@@ -1,9 +1,9 @@
 package by.beatdev.controller;
 
-import by.beatdev.dto.CreatingUserResponse;
-import by.beatdev.entity.User;
 import by.beatdev.dto.ChangingStatusRequest;
 import by.beatdev.dto.ChangingStatusResponse;
+import by.beatdev.dto.CreatingUserResponse;
+import by.beatdev.entity.User;
 import by.beatdev.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/users")
 public class UserController {
 
+    final Logger LOG = Logger.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
-    final Logger LOG = Logger.getLogger(UserController.class);
-
     @GetMapping(value = "/{id}")
-    public User getUser(@PathVariable("id") int id){
+    public User getUser(@PathVariable("id") int id) {
         return userService.findEntityById(id);
     }
 
@@ -33,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/changestatus", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ChangingStatusResponse updateUserStatus(@RequestBody ChangingStatusRequest request){
+    public ChangingStatusResponse updateUserStatus(@RequestBody ChangingStatusRequest request) {
         return userService.updateUserStatus(request);
     }
 }

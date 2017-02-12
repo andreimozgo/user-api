@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @GenericGenerator(name = "PK", strategy = "increment")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User extends AbstractEntity  {
+public class User extends AbstractEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "user_id")
@@ -16,11 +16,11 @@ public class User extends AbstractEntity  {
     private Integer id;
     @Column(name = "name")
     private String name;
-    @Column (name = "avatar")
+    @Column(name = "avatar")
     private String avatar;
-    @Column (name = "email")
+    @Column(name = "email")
     private String email;
-    @Column (name = "status", nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
@@ -29,12 +29,12 @@ public class User extends AbstractEntity  {
         this.status = UserStatus.Offline;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
