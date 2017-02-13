@@ -27,7 +27,7 @@ public class UserController {
             user = userService.getEntityById(id);
         } catch (NotFoundServiceException e) {
             LOG.error("User not found: ", e);
-            throw new NotFoundException("User not found with id " + id);
+            throw new NotFoundException(e.getMessage());
         }
         return user;
     }
@@ -47,7 +47,7 @@ public class UserController {
             previousStatus = userService.updateUserStatus(request.getId(), request.getNewStatus());
         } catch (NotFoundServiceException e) {
             LOG.error("User not found: ", e);
-            throw new NotFoundException("User not found with id " + request.getId());
+            throw new NotFoundException(e.getMessage());
         }
         ChangingStatusResponse response = new ChangingStatusResponse();
         response.setId(request.getId());

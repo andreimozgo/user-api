@@ -33,7 +33,7 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         threadSleep();
         User user = userRepository.findOne(id);
         if(user == null) {
-            throw new NotFoundServiceException();
+            throw new NotFoundServiceException("Not found user with id="+id);
         }
         return user;
     }

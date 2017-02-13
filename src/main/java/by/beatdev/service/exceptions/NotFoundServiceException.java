@@ -6,4 +6,8 @@ package by.beatdev.service.exceptions;
  * @author Andrei Mozgo
  */
 public class NotFoundServiceException extends ServiceException {
+
+    public NotFoundServiceException(String message) {
+        super(message);
+    }
 }
