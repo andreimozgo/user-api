@@ -29,7 +29,7 @@ public class UserServiceImplTest extends Assert {
     }
 
     @Test
-    public void testFindEntityById() throws NotFoundServiceException {
+    public void testGetEntityById() throws NotFoundServiceException {
         User user = new User();
         user.setName("testUser");
         userService.save(user);
@@ -43,11 +43,10 @@ public class UserServiceImplTest extends Assert {
     @Test
     public void testDelete() throws NotFoundServiceException {
         User user = new User();
-        user.setId(null);
         user.setName("testUser");
         userService.save(user);
         userService.delete(user.getId());
-        User deletedUser = userService.getEntityById(user.getId());
+        User deletedUser = userService.findById(user.getId());
         assertNull(deletedUser);
     }
 }

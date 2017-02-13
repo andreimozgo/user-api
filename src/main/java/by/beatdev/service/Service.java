@@ -10,4 +10,6 @@ public interface Service<T extends AbstractEntity> {
     T getEntityById(Integer id) throws NotFoundServiceException;
 
     void delete(Integer id);
+
+    T findById(Integer id);
 }

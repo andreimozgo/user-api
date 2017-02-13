@@ -52,6 +52,11 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         return previousStatus;
     }
 
+    public User findById(Integer id){
+        User user = userRepository.findOne(id);
+        return user;
+    }
+
     private void threadSleep(){
         try {
             Thread.sleep(5000);
