@@ -1,8 +1,9 @@
 Available requests:
 
 1. Add new user:
-
-localhost/api/users
+HTTP method POST
+Content-Type Json
+URL://localhost/api/users
 
     {
       "avatar": "https://www.google.by/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png",
@@ -11,14 +12,16 @@ localhost/api/users
     }
 
 2. Get user info:
+HTTP method GET
 
-localhost/api/users/
+URL://localhost/api/users/
 
 parameters: userId
 
 3. Update user status:
-
-localhost/api/users/changestatus/
+HTTP method PUT
+Content-Type Json
+URL://localhost/api/users/changestatus/
 
     {
       "id": 1,
