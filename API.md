@@ -27,6 +27,11 @@
 * HTTP method: GET
 * URL: http://localhost/api/users/{userId} 
 * where {userId} - user id
+* Request example:
+
+
+    http://localhost/api/users/1 
+    
 * Response example:
 
 
