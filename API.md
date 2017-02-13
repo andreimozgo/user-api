@@ -1,9 +1,11 @@
-Available requests:
+***Available requests:***
 
-1. Add new user:
-HTTP method POST
-Content-Type Json
-URL://localhost/api/users
+**1. Add new user:**
+
+* HTTP method: POST
+* Content-Type: application/json
+* URL: http://localhost/api/users
+
 
     {
       "avatar": "https://www.google.by/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png",
@@ -11,17 +13,18 @@ URL://localhost/api/users
       "email": "a.mozgo@gmail.com"
     }
 
-2. Get user info:
-HTTP method GET
+**2. Get user info:**
 
-URL://localhost/api/users/
+* HTTP method: GET
+* URL: http://localhost/api/users/{userId}
+* parameters: userId
 
-parameters: userId
+**3. Update user status:**
 
-3. Update user status:
-HTTP method PUT
-Content-Type Json
-URL://localhost/api/users/changestatus/
+* HTTP method: PUT
+* Content-Type: application/json
+* URL: http://localhost/api/users/changestatus/
+
 
     {
       "id": 1,
