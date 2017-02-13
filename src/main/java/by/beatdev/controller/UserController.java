@@ -38,6 +38,10 @@ public class UserController {
 
     @PutMapping(value = "/changestatus", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ChangingStatusResponse updateUserStatus(@RequestBody ChangingStatusRequest request) {
+        User user = userService.findEntityById(request.getId());
+        if(user == null) {
+            throw new NotFoundException("User not found with id " + request.getId());
+        }
         UserStatus previousStatus = userService.updateUserStatus(request.getId(), request.getNewStatus());
         ChangingStatusResponse response = new ChangingStatusResponse();
         response.setId(request.getId());
