@@ -6,6 +6,7 @@ import by.beatdev.dto.CreatingUserResponse;
 import by.beatdev.entity.User;
 import by.beatdev.entity.UserStatus;
 import by.beatdev.service.UserService;
+import by.beatdev.service.exceptions.ServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,8 +22,11 @@ public class UserController {
 
     @GetMapping(value = "/{id}")
     public User getUser(@PathVariable("id") int id) {
-        User user = userService.findEntityById(id);
-        if(user == null) {
+        User user;
+        try {
+            user = userService.findEntityById(id);
+        } catch (ServiceException e) {
+            LOG.error("User not found: ", e);
             throw new NotFoundException("User not found with id " + id);
         }
         return user;
@@ -38,11 +42,13 @@ public class UserController {
 
     @PutMapping(value = "/changestatus", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ChangingStatusResponse updateUserStatus(@RequestBody ChangingStatusRequest request) {
-        User user = userService.findEntityById(request.getId());
-        if(user == null) {
+        UserStatus previousStatus;
+        try {
+            previousStatus = userService.updateUserStatus(request.getId(), request.getNewStatus());
+        } catch (ServiceException e) {
+            LOG.error("User not found: ", e);
             throw new NotFoundException("User not found with id " + request.getId());
         }
-        UserStatus previousStatus = userService.updateUserStatus(request.getId(), request.getNewStatus());
         ChangingStatusResponse response = new ChangingStatusResponse();
         response.setId(request.getId());
         response.setNewStatus(request.getNewStatus());

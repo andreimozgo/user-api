@@ -6,6 +6,7 @@ import by.beatdev.entity.UserStatus;
 import by.beatdev.repository.UserRepository;
 import by.beatdev.service.AbstractService;
 import by.beatdev.service.UserService;
+import by.beatdev.service.exceptions.ServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,12 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         threadSleep();
     }
 
-    public User findEntityById(Integer id) {
-        User user = userRepository.findOne(id);
+    public User findEntityById(Integer id) throws ServiceException {
         threadSleep();
+        User user = userRepository.findOne(id);
+        if(user == null) {
+            throw new ServiceException();
+        }
         return user;
     }
 
@@ -38,13 +42,13 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         userRepository.delete(id);
     }
 
-    public UserStatus updateUserStatus(Integer userId, UserStatus newStatus) {
+    public UserStatus updateUserStatus(Integer userId, UserStatus newStatus) throws ServiceException {
+        threadSleep();
         ChangingStatusResponse response = new ChangingStatusResponse();
         User user = findEntityById(userId);
         UserStatus previousStatus = user.getStatus();
         user.setStatus(newStatus);
         save(user);
-        threadSleep();
         return previousStatus;
     }
 
