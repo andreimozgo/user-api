@@ -25,10 +25,12 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
 
     public void save(User user) {
         userRepository.save(user);
+        threadSleep();
     }
 
     public User findEntityById(Integer id) {
         User user = userRepository.findOne(id);
+        threadSleep();
         return user;
     }
 
@@ -42,6 +44,15 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
         UserStatus previousStatus = user.getStatus();
         user.setStatus(newStatus);
         save(user);
+        threadSleep();
         return previousStatus;
+    }
+
+    private void threadSleep(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            LOG.error("Error Thread.sleep: ", e);
+        }
     }
 }
