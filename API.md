@@ -16,8 +16,8 @@
 **2. Get user info:**
 
 * HTTP method: GET
-* URL: http://localhost/api/users/{userId}
-* parameters: userId
+* URL: http://localhost/api/users/{userId} 
+* where {userId} - user id
 
 **3. Update user status:**
 
