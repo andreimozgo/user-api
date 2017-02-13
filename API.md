@@ -5,6 +5,7 @@
 * HTTP method: POST
 * Content-Type: application/json
 * URL: http://localhost/api/users
+* Request example:
 
 
     {
@@ -42,6 +43,7 @@
 * HTTP method: PUT
 * Content-Type: application/json
 * URL: http://localhost/api/users/changestatus/
+* Request example:
 
 
     {
