@@ -6,7 +6,7 @@ import by.beatdev.dto.CreatingUserResponse;
 import by.beatdev.entity.User;
 import by.beatdev.entity.UserStatus;
 import by.beatdev.service.UserService;
-import by.beatdev.service.exceptions.ServiceException;
+import by.beatdev.service.exceptions.NotFoundServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,8 +24,8 @@ public class UserController {
     public User getUser(@PathVariable("id") int id) {
         User user;
         try {
-            user = userService.findEntityById(id);
-        } catch (ServiceException e) {
+            user = userService.getEntityById(id);
+        } catch (NotFoundServiceException e) {
             LOG.error("User not found: ", e);
             throw new NotFoundException("User not found with id " + id);
         }
@@ -45,7 +45,7 @@ public class UserController {
         UserStatus previousStatus;
         try {
             previousStatus = userService.updateUserStatus(request.getId(), request.getNewStatus());
-        } catch (ServiceException e) {
+        } catch (NotFoundServiceException e) {
             LOG.error("User not found: ", e);
             throw new NotFoundException("User not found with id " + request.getId());
         }

@@ -2,6 +2,7 @@ package by.beatdev;
 
 import by.beatdev.entity.User;
 import by.beatdev.service.UserService;
+import by.beatdev.service.exceptions.NotFoundServiceException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,22 +18,22 @@ public class UserServiceImplTest extends Assert {
     private UserService userService;
 
     @Test
-    public void testCreate() {
+    public void testCreate() throws NotFoundServiceException {
         User user = new User();
         user.setName("testUser");
         userService.save(user);
-        User readUser = userService.findEntityById(user.getId());
+        User readUser = userService.getEntityById(user.getId());
         assertNotNull(readUser);
         assertEquals(user.getName(), readUser.getName());
         userService.delete(user.getId());
     }
 
     @Test
-    public void testFindEntityById() {
+    public void testFindEntityById() throws NotFoundServiceException {
         User user = new User();
         user.setName("testUser");
         userService.save(user);
-        User findUser = userService.findEntityById(user.getId());
+        User findUser = userService.getEntityById(user.getId());
         assertNotNull(findUser);
         assertEquals(user.getId(), findUser.getId());
         assertEquals(user.getName(), findUser.getName());
@@ -40,13 +41,13 @@ public class UserServiceImplTest extends Assert {
     }
 
     @Test
-    public void testDelete() {
+    public void testDelete() throws NotFoundServiceException {
         User user = new User();
         user.setId(null);
         user.setName("testUser");
         userService.save(user);
         userService.delete(user.getId());
-        User deletedUser = userService.findEntityById(user.getId());
+        User deletedUser = userService.getEntityById(user.getId());
         assertNull(deletedUser);
     }
 }

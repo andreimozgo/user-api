@@ -1,13 +1,13 @@
 package by.beatdev.service;
 
 import by.beatdev.entity.AbstractEntity;
-import by.beatdev.service.exceptions.ServiceException;
+import by.beatdev.service.exceptions.NotFoundServiceException;
 
 public interface Service<T extends AbstractEntity> {
 
     void save(T t);
 
-    T findEntityById(Integer id) throws ServiceException;
+    T getEntityById(Integer id) throws NotFoundServiceException;
 
     void delete(Integer id);
 }

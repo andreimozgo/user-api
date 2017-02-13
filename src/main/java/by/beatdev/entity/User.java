@@ -1,13 +1,11 @@
 package by.beatdev.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 @GenericGenerator(name = "PK", strategy = "increment")
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User extends AbstractEntity {
     private static final long serialVersionUID = 1L;
     @Id
