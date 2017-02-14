@@ -1,5 +1,6 @@
 package by.beatdev.controller;
 
+import by.beatdev.controller.exceptions.NotFoundException;
 import by.beatdev.dto.ChangingStatusRequest;
 import by.beatdev.dto.ChangingStatusResponse;
 import by.beatdev.dto.CreatingUserResponse;
